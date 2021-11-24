@@ -1,0 +1,187 @@
+/* base html */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Montserrat:ital,wght@1,200&family=Noto+Serif+Display:wght@900&family=Oswald&family=Roboto+Mono&display=swap');
+body {
+  background-color: #102040;
+}
+/* header */
+.header {
+  width: 100%;
+  height: 160px;
+  display: block;
+  background-color: #102040;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.inner-header {
+  width: 1200px;
+  height: 100%;
+  display: table;
+  background-color: #102040;
+  position: relative;
+}
+/* header images */
+.header-images {
+  display: flex;
+  position: relative;
+  left: 0;
+}
+.header-images img {
+  height: 160px;
+  width: auto;
+  opacity: 0.6;
+  position: relative;
+  display: block;
+  left: 20%;
+}
+/* logo button */
+.inner-header-text img {
+  display: block;
+  height: 160px;
+  width: auto;
+  position: absolute;
+  opacity: 1;
+  left: 3%;
+  border-radius: 50%;
+  transition: 2s;
+}
+.inner-header-text img:hover {
+  transform: rotate(360deg);
+}
+/* login and register buttons */
+.inner-header-text .login-buttons {
+  display: block;
+  position: absolute;
+  top: 10%;
+  left: 95%;
+}
+.login-buttons a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+.login-buttons a button {
+  width: 200px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #093361;
+  color: #F2C879;
+  text-shadow: 2px 2px #093361;
+  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+  border-radius: 10px;
+  border: 3px solid #093361;
+  transition: 1s;
+}
+.login-buttons a button:hover {
+  background-color: #79a1b8;
+  width: 250px;
+  height: 60px;
+  border: 3px solid #79a1b8;
+}
+
+/* sidebar menu */
+.sidenav {
+  height: 80%;
+  width: 240px;
+  position: fixed;
+  z-index: 1;
+  top: 160px;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(121,161,184,1) 1%, rgba(9,51,97,1) 90%);
+  overflow-x: hidden;
+  padding-top: 20px;
+  text-align: right;
+}
+
+.sidenav a {
+  padding: 8px 10px 8px 10px;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: #102040;
+  text-shadow: 1px 1px #79a1b8;
+  display: block;
+  transition: 1s;
+  text-transform: lowercase;
+}
+
+.sidenav a:hover {
+  color: #F3cd74;
+  font-size: 31px;
+}
+/* main content */
+.container {
+  position: relative;
+  width: 1100px;
+  height: 600px;
+  top: 180px;
+  margin-left: 260px;
+  border-radius: 5px 5px;
+  background: linear-gradient(180deg, rgba(9,51,97,1) 1%, #102040 90%);
+}
+.container .box {
+  position: absolute;
+  width: 1040px;
+  height: 90%;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+  color: #102040;
+  padding: 15px;
+  margin: 15px;
+  background: linear-gradient(180deg, rgba(9,51,97,1) 1%, #102040 90%);
+}
+.box h3 {
+  text-align: center;
+}
+/* homepage */
+.video {
+  position: relative;
+  width: 1040px;
+  height: auto;
+  top: 80px;
+  text-align: center;
+}
+/* registration page */
+.reg-title {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.form-box {
+  height: 550px;
+  width: 380px;
+  background: linear-gradient(180deg, #CCE0E8 1%, rgba(121,161,184,1) 90%);
+  border-radius: 5px 5px;
+  margin-left: 290px;
+  padding-left: 15px;
+  padding-top: 5px;
+  right: 50%;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+.form-box input {
+  width: 340px;
+}
+.form-box input:hover {
+  border: 2px solid #79a1b8;
+}
+
+.form-box .reg-button {
+  width: 200px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+  background-color: #093361;
+  color: #F2C879;
+  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+  border-radius: 10px;
+  border: 3px solid #093361;
+  margin-left: 80px;
+}
+.form-box .reg-button:hover {
+  background-color: #F2C879;
+  border: 3px solid #F2C879;
+  color: #093361;
+}
