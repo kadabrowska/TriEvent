@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from TriEvent_app.views import HomepageView, FindRaceView, RacesListView, RegistrationView
+from TriEvent_app.views import HomepageView, FindRaceView, RacesListView, RegistrationView, LoginView, \
+    RegistrationSuccessfulView, RaceDetailsView, LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,8 @@ urlpatterns = [
     path('findrace/', FindRaceView.as_view(), name="find-race"),
     path('races/', RacesListView.as_view(), name="races-list"),
     path('registration/', RegistrationView.as_view(), name="registration"),
+    path('registration/successful/', RegistrationSuccessfulView.as_view(), name="registration-successful"),
+    path('login/', LoginView.as_view(), name='login'),
+    path('races/details/<int:race_id>', RaceDetailsView.as_view(), name='race-details'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

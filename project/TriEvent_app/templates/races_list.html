@@ -1,4 +1,14 @@
 {% extends "base.html" %}
 {% block title %}{% endblock title %}
 {% block content %}
+<h3>Znaleziono:</h3>
+{% for race in races_list %}
+<div class='races-list'>
+    <ul>
+    <li><a href='details/{{race.id}}'>{{race.name}}</a></li>
+    </ul>
+</div>
+{% empty %}
+<strong>Brak wyników wyszukiwania</strong>
+{% endfor %}
 {% endblock %}

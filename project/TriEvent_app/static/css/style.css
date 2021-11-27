@@ -1,14 +1,14 @@
 /* base html */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Montserrat:ital,wght@1,200&family=Noto+Serif+Display:wght@900&family=Oswald&family=Roboto+Mono&display=swap');
 body {
-  background-color: #102040;
+  background-color: lightgray;
 }
 /* header */
 .header {
   width: 100%;
   height: 160px;
   display: block;
-  background-color: #102040;
+  background-color: rgba(121,161,184,1);
   position: fixed;
   left: 0;
   top: 0;
@@ -17,7 +17,7 @@ body {
   width: 1200px;
   height: 100%;
   display: table;
-  background-color: #102040;
+  background-color: rgba(121,161,184,1);
   position: relative;
 }
 /* header images */
@@ -29,7 +29,7 @@ body {
 .header-images img {
   height: 160px;
   width: auto;
-  opacity: 0.6;
+  opacity: 0.8;
   position: relative;
   display: block;
   left: 20%;
@@ -43,7 +43,7 @@ body {
   opacity: 1;
   left: 3%;
   border-radius: 50%;
-  transition: 2s;
+  transition: 3s;
 }
 .inner-header-text img:hover {
   transform: rotate(360deg);
@@ -67,17 +67,15 @@ body {
   padding: 10px;
   background-color: #093361;
   color: #F2C879;
-  text-shadow: 2px 2px #093361;
   font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
   border-radius: 10px;
   border: 3px solid #093361;
   transition: 1s;
 }
 .login-buttons a button:hover {
-  background-color: #79a1b8;
-  width: 250px;
-  height: 60px;
-  border: 3px solid #79a1b8;
+  background-color: #F2C879;
+  border: 3px solid #F2C879;
+  color: #093361;
 }
 
 /* sidebar menu */
@@ -109,7 +107,6 @@ body {
 }
 
 .sidenav a:hover {
-  color: #F3cd74;
   font-size: 31px;
 }
 /* main content */
@@ -120,7 +117,7 @@ body {
   top: 180px;
   margin-left: 260px;
   border-radius: 5px 5px;
-  background: linear-gradient(180deg, rgba(9,51,97,1) 1%, #102040 90%);
+  background: lightgray;
 }
 .container .box {
   position: absolute;
@@ -131,7 +128,7 @@ body {
   color: #102040;
   padding: 15px;
   margin: 15px;
-  background: linear-gradient(180deg, rgba(9,51,97,1) 1%, #102040 90%);
+  background: lightgray;
 }
 .box h3 {
   text-align: center;
@@ -152,17 +149,18 @@ body {
 .form-box {
   height: 550px;
   width: 380px;
-  background: linear-gradient(180deg, #CCE0E8 1%, rgba(121,161,184,1) 90%);
+  background: linear-gradient(180deg, rgba(121,161,184,1) 1%, #CCE0E8 15%, rgba(121,161,184,1) 90%);
   border-radius: 5px 5px;
   margin-left: 290px;
   padding-left: 15px;
   padding-top: 5px;
   right: 50%;
   font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
 }
 .form-box input {
   width: 340px;
+  height: 20px;
+  border-radius: 5px 5px;
 }
 .form-box input:hover {
   border: 2px solid #79a1b8;
@@ -170,7 +168,8 @@ body {
 
 .form-box .reg-button {
   width: 200px;
-  font-size: 20px;
+  height: auto;
+  font-size: 17px;
   font-weight: bold;
   padding: 5px;
   background-color: #093361;
@@ -184,4 +183,52 @@ body {
   background-color: #F2C879;
   border: 3px solid #F2C879;
   color: #093361;
+}
+/* find race page */
+.search-form-box {
+  height: 550px;
+  width: 380px;
+  background: linear-gradient(180deg, rgba(121,161,184,1) 1%, #CCE0E8 15%, rgba(121,161,184,1) 90%);
+  border-radius: 5px 5px;
+  margin-left: 290px;
+  padding-left: 15px;
+  padding-top: 5px;
+  right: 50%;
+  font-family: 'Montserrat', sans-serif;
+}
+.search-form-box input {
+  width: 340px;
+  height: auto;
+  border-radius: 5px 5px;
+}
+.search-form-box .search-button {
+  width: 200px;
+  height: auto;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 5px;
+  background-color: #093361;
+  color: #F2C879;
+  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+  border-radius: 10px;
+  border: 3px solid #093361;
+  margin-left: 80px;
+  display: block;
+}
+.search-form-box .search-button:hover {
+  background-color: #F2C879;
+  border: 3px solid #F2C879;
+  color: #093361;
+}
+.races-list ul{
+  list-style: none;
+}
+.races-list ul li a{
+  text-decoration: none;
+  color: #102040;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+.races-list ul li a:hover {
+  color: #79a1b8;
 }

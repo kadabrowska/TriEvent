@@ -1,4 +1,7 @@
+import null as null
+from django.contrib.auth.models import User
 from django.db import models
+from datetime import date
 
 
 DISTANCE = (
@@ -58,10 +61,9 @@ RATING = (
 
 
 class Athlete(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
-    email = models.EmailField()
-    password = models.CharField(max_length=60)
     proficiency = models.CharField(choices=PROFICIENCY, max_length=30, default=None)
     age_group = models.CharField(choices=AGE_GROUP, max_length=15)
     created = models.DateTimeField(auto_now_add=True)
@@ -73,6 +75,7 @@ class Race(models.Model):
     name = models.CharField(max_length=255)
     organiser = models.CharField(max_length=255)
     distance = models.IntegerField(choices=DISTANCE)
+    date = models.DateField(default=date.today)
     city = models.CharField(max_length=255)
     voivodeship = models.CharField(choices=VOIVODESHIP, max_length=50)
     description = models.CharField(max_length=1500)
