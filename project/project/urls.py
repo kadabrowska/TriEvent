@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from TriEvent_app.views import HomepageView, FindRaceView, RacesListView, RegistrationView, LoginView, \
-    RegistrationSuccessfulView, RaceDetailsView, LogoutView
+    RegistrationSuccessfulView, RaceDetailsView, LogoutView, AddRaceView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +29,5 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('races/details/<int:race_id>', RaceDetailsView.as_view(), name='race-details'),
     path('logout/', LogoutView.as_view(), name='logout'),
+    path('race/add/<int:race_id>', AddRaceView.as_view(), name='add-race')
 ]

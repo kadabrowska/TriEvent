@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 {% block title %}{% endblock title %}
 {% block content %}
-<div>
+<div class="details-page">
     <h2>{{ race.name }}</h2>
     <h3> {{ race.date }}</h3>
     <p> {{ race.description}}</p>
+    <p> Zapisy -> <a href='{{ race.race_url }}'>tutaj</a></p>
+    {% if user.is_authenticated %}
+    <h3>
+      <a href="/race/add/{{ race.id }}/">Biorę udział!</a>
+    </h3>
+    {% endif %}
 </div>
 {% endblock %}

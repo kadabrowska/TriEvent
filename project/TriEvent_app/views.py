@@ -48,7 +48,8 @@ class RacesListView(View):
 class RaceDetailsView(View):
     def get(self, request, race_id):
         race = Race.objects.get(id=race_id)
-        return render(request, "race_details.html")
+        ctx = {'race':race}
+        return render(request, "race_details.html", ctx)
 
 
 class RegistrationView(View):
@@ -120,3 +121,9 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect("login")
+
+
+class AddRaceView(View):
+    def get(self, request):
+        return render(request, 'race-details')
+
