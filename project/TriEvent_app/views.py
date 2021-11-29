@@ -3,13 +3,13 @@ from datetime import timedelta, datetime
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse
 from django.views import View
 
-from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm, ReviewForm
-from TriEvent_app.models import Athlete, Race, Review
+from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm
+from TriEvent_app.models import Athlete, Race, PROFICIENCY, AGE_GROUP
 from django.views.generic import CreateView, DetailView
 
 
@@ -123,13 +123,27 @@ class LogoutView(View):
         return redirect("login")
 
 
-class AddRaceView(View):
+class MyRacesView(View):
     def get(self, request):
-        return render(request, 'race-details')
+        return render(request, 'my_races.html')
 
 
-class ReviewView(View):
+class MyResultsView(View):
     def get(self, request):
-        form = ReviewForm()
-        ctx = {'form':form}
-        return render(request, 'race-details', ctx)
+        return render(request, 'my_results.html')
+
+
+class MyProfileView(View):
+    def get(self, request):
+        athlete = Athlete.objects.all()
+        ctx = {'athlete': athlete}
+        return render(request, 'profile.html', ctx)
+
+
+
+
+
+
+
+
+

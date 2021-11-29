@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
-from TriEvent_app.models import PROFICIENCY, AGE_GROUP, DISTANCE, VOIVODESHIP, RATING
+from TriEvent_app.models import PROFICIENCY, AGE_GROUP, DISTANCE, VOIVODESHIP
 
 
 class RegistrationForm(forms.Form):
@@ -27,9 +27,15 @@ class FindRaceForm(forms.Form):
     organiser = forms.CharField(max_length=255, label='organizator', required=False)
 
 
-class ReviewForm(forms.Form):
-    rating = forms.ChoiceField(choices=RATING)
-    comment = forms.CharField(widget=forms.Textarea)
+# class ReviewForm(forms.Form):
+#     rating = forms.ChoiceField(choices=RATING, label='Ocena:')
+#     comment = forms.CharField(widget=forms.Textarea, label="Napisz coś...")
+
+
+# class ResetProfileForm(forms.Form):
+#     password = forms.CharField(max_length=120, label="nowe hasło", widget=forms.PasswordInput, required=True)
+#     proficiency = forms.ChoiceField(choices=PROFICIENCY, label="nowy status", required=True)
+#     age_group = forms.ChoiceField(choices=AGE_GROUP, label='nowa grupa wiekowa', required=True)
 
 
 

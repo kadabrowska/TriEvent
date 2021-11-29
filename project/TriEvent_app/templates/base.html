@@ -27,9 +27,9 @@
     <div class="inner-header">
         <div class="navbar">
             <a href="{% url 'find-race' %}">Znajdź zawody</a>
-            <a href="#">Moje zawody</a>
-            <a href="#">Moje wyniki</a>
-            <a href="#">Profil</a>
+            <a href="{% url 'my-races' %}">Moje zawody</a>
+            <a href="{% url 'my-results' %}">Moje wyniki</a>
+            <a href="{% url 'my-profile' %}">Profil</a>
         </div>
             <div class="inner-header-text">
                 <a href="{% url 'homepage' %}">

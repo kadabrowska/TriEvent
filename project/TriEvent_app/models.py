@@ -33,22 +33,22 @@ VOIVODESHIP = (
 )
 
 AGE_GROUP = (
-    (1, "UNDER-19"),
-    (2, "20-24"),
-    (3, "25-29"),
-    (4, "30-34"),
-    (5, "35-39"),
-    (6, "40-44"),
-    (7, "45-49"),
-    (8, "50-54"),
-    (9, "55-59"),
-    (10, "60-64"),
-    (11, "65-OVER"),
+    ("UNDER-19", "UNDER-19"),
+    ("20-24", "20-24"),
+    ("25-29", "25-29"),
+    ("30-34", "30-34"),
+    ("35-39", "35-39"),
+    ("40-44", "40-44"),
+    ("45-49", "45-49"),
+    ("50-54", "50-54"),
+    ("55-59", "55-59"),
+    ("60-64", "60-64"),
+    ("65-OVER", "65-OVER"),
 )
 
 PROFICIENCY = (
-    (1, "amateur"),
-    (2, "professional"),
+    ("amateur", "amateur"),
+    ("professional", "professional"),
 )
 
 RATING = (
@@ -95,7 +95,9 @@ class Results(models.Model):
 
 class Review(models.Model):
     race = models.ForeignKey(Race, on_delete=models.CASCADE)
+    name = models.CharField(max_length=120, default='Anonim')
     rating = models.IntegerField(choices=RATING)
     comment = models.TextField(max_length=500)
+
 
 

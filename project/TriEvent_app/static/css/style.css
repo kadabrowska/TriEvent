@@ -145,6 +145,9 @@ body {
   left: 35%;
   font-family: 'Montserrat', sans-serif;
 }
+.profile-description {
+  line-height: 30px;
+}
 .form-box input {
   width: 340px;
   height: 18px;
@@ -231,9 +234,9 @@ body {
   text-align: left;
   margin: 10px;
 }
-.rating-box input {
+.rating-box textarea {
   width: 95%;
   background: whitesmoke;
-  height: 180px;
+  height: 150px;
   margin: 10px;
 }
