@@ -8,8 +8,8 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse
 from django.views import View
 
-from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm
-from TriEvent_app.models import Athlete, Race
+from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm, ReviewForm
+from TriEvent_app.models import Athlete, Race, Review
 from django.views.generic import CreateView, DetailView
 
 
@@ -127,3 +127,9 @@ class AddRaceView(View):
     def get(self, request):
         return render(request, 'race-details')
 
+
+class ReviewView(View):
+    def get(self, request):
+        form = ReviewForm()
+        ctx = {'form':form}
+        return render(request, 'race-details', ctx)

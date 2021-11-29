@@ -198,3 +198,42 @@ body {
 .details-page a:hover {
   color: lightgray;
 }
+.box-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: absolute;
+  opacity: 0.6;
+  margin-top: 5px;
+}
+.enrolled-box {
+  width: 47%;
+  height: auto;
+  text-align: center;
+  background: black;
+  margin-right: 3%;
+  opacity: revert;
+  position: relative;
+  border-radius: 5px;
+  padding: 5px;
+}
+.rating-box {
+  width: 47%;
+  text-align: center;
+  background: black;
+  margin-left: 3%;
+  height: auto;
+  position: relative;
+  border-radius: 5px;
+  padding: 5px;
+}
+.rating {
+  text-align: left;
+  margin: 10px;
+}
+.rating-box input {
+  width: 95%;
+  background: whitesmoke;
+  height: 180px;
+  margin: 10px;
+}

@@ -10,6 +10,16 @@
     <h3>
       <a href="/race/add/{{ race.id }}/">Biorę udział!</a>
     </h3>
+    <div class="box-container">
+        <div class="enrolled-box">W tych zawodach startują:</div>
+        <div class="rating-box">Zostaw opinię:
+            <form action="#" method="get">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Wyślij" class="reg-button">
+            </form>
+        </div>
+    </div>
     {% endif %}
 </div>
 {% endblock %}
