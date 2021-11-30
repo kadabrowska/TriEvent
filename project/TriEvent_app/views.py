@@ -1,16 +1,11 @@
-from datetime import timedelta, datetime
-
-from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
 from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm
-from TriEvent_app.models import Athlete, Race, PROFICIENCY, AGE_GROUP
-from django.views.generic import CreateView, DetailView
+from TriEvent_app.models import Athlete, Race
 
 
 class HomepageView(View):
@@ -40,7 +35,7 @@ class RacesListView(View):
             races_list = races_list.filter(organiser=organiser)
 
         ctx = {
-            'races_list':races_list
+            'races_list': races_list
         }
         return render(request, "races_list.html", ctx)
 
@@ -48,7 +43,7 @@ class RacesListView(View):
 class RaceDetailsView(View):
     def get(self, request, race_id):
         race = Race.objects.get(id=race_id)
-        ctx = {'race':race}
+        ctx = {'race': race}
         return render(request, "race_details.html", ctx)
 
 
@@ -70,7 +65,8 @@ class RegistrationView(View):
             age_group = form.cleaned_data["age_group"]
 
             if User.objects.filter(email=email):
-                form.add_error('email', "Konto z tym adresem email już istnieje")
+                form.add_error('email',
+                               "Konto z tym adresem email już istnieje")
 
             if not form.errors:
                 user = User.objects.create_user(
@@ -94,7 +90,7 @@ class RegistrationView(View):
 class LoginView(View):
     def get(self, request):
         form = LoginForm()
-        ctx = {'form':form}
+        ctx = {'form': form}
         return render(request, "login.html", ctx)
 
     def post(self, request):
@@ -108,7 +104,7 @@ class LoginView(View):
                 return redirect('{}?login=True'.format(reverse('find-race')))
             else:
                 form.add_error(None, "Niepoprawny email i/lub hasło")
-        ctx = {'form':form}
+        ctx = {'form': form}
         return render(request, "login.html", ctx)
 
 
@@ -140,10 +136,25 @@ class MyProfileView(View):
         return render(request, 'profile.html', ctx)
 
 
-
-
-
-
-
-
-
+# class EnrollView(View):
+#     def get(self, request):
+#         form = EnrollForm()
+#         ctx = { 'form': form }
+#         return render(request, 'race_details.html', ctx)
+#
+#     def post(self, request):
+#         athlete_id = Athlete.objects.get(pk=id)
+#         race_id = Race.objects.get(pk=id)
+#         form = EnrollForm(request.POST)
+#         if form.is_valid():
+#             athlete_id = form.cleaned_data['athlete_id']
+#             race_id = form.cleaned_data['race_id']
+#             if Race.objects.filter(pk=request.race.pk,
+#                                    participants=athlete_id):
+#                 form.add_error("Już zapisałaś/zapisałeś się na te zawody")
+#
+#             if not form.errors:
+#                 race_id = Race.objects.filter(pk=request.race.pk).create
+#                                              (participants=athlete_id)
+#         ctx = {'athlete_id': athlete_id, 'race_id': race_id, }
+#         return render(request, 'race_details.html', ctx)

@@ -1,4 +1,3 @@
-import null as null
 from django.contrib.auth.models import User
 from django.db import models
 from datetime import date
@@ -98,6 +97,3 @@ class Review(models.Model):
     name = models.CharField(max_length=120, default='Anonim')
     rating = models.IntegerField(choices=RATING)
     comment = models.TextField(max_length=500)
-
-
-
