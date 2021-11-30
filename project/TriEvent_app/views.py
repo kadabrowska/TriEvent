@@ -55,6 +55,8 @@ class RegistrationView(View):
 
     def post(self, request):
         form = RegistrationForm(request.POST)
+        # if not form.is_valid():
+        #     return redirect('registration')
         if form.is_valid():
             first_name = form.cleaned_data["first_name"]
             last_name = form.cleaned_data["last_name"]
