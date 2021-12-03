@@ -31,5 +31,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='logout'),
     path('my/races/', MyRacesView.as_view(), name='my-races'),
     path('my/results/', MyResultsView.as_view(), name='my-results'),
-    path('my/profile/', MyProfileView.as_view(), name='my-profile'),
+    path('my/profile/<int:user_id>/', MyProfileView.as_view(), name='my-profile'),
 ]

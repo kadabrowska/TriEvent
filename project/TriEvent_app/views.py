@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm
+from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm, EnrollForm
 from TriEvent_app.models import Athlete, Race
 
 
@@ -34,9 +34,7 @@ class RacesListView(View):
         if organiser:
             races_list = races_list.filter(organiser=organiser)
 
-        ctx = {
-            'races_list': races_list
-        }
+        ctx = {'races_list': races_list}
         return render(request, "races_list.html", ctx)
 
 
@@ -55,8 +53,6 @@ class RegistrationView(View):
 
     def post(self, request):
         form = RegistrationForm(request.POST)
-        # if not form.is_valid():
-        #     return redirect('registration')
         if form.is_valid():
             first_name = form.cleaned_data["first_name"]
             last_name = form.cleaned_data["last_name"]
@@ -87,6 +83,9 @@ class RegistrationView(View):
 
             ctx = {"form": form}
             return render(request, "registration_page.html", ctx)
+
+        else:
+            return redirect('registration', {"form":form} )
 
 
 class LoginView(View):
@@ -132,31 +131,29 @@ class MyResultsView(View):
 
 
 class MyProfileView(View):
-    def get(self, request):
-        athlete = Athlete.objects.all()
+    def get(self, request, user_id):
+        athlete = User.objects.get(id=user_id)
         ctx = {'athlete': athlete}
         return render(request, 'profile.html', ctx)
 
 
-# class EnrollView(View):
-#     def get(self, request):
-#         form = EnrollForm()
-#         ctx = { 'form': form }
-#         return render(request, 'race_details.html', ctx)
-#
-#     def post(self, request):
-#         athlete_id = Athlete.objects.get(pk=id)
-#         race_id = Race.objects.get(pk=id)
-#         form = EnrollForm(request.POST)
-#         if form.is_valid():
-#             athlete_id = form.cleaned_data['athlete_id']
-#             race_id = form.cleaned_data['race_id']
-#             if Race.objects.filter(pk=request.race.pk,
-#                                    participants=athlete_id):
-#                 form.add_error("Już zapisałaś/zapisałeś się na te zawody")
-#
-#             if not form.errors:
-#                 race_id = Race.objects.filter(pk=request.race.pk).create
-#                                              (participants=athlete_id)
-#         ctx = {'athlete_id': athlete_id, 'race_id': race_id, }
-#         return render(request, 'race_details.html', ctx)
+class EnrollView(View):
+    def get(self, request):
+        form = EnrollForm()
+        ctx = { 'form': form }
+        return render(request, 'race_details.html', ctx)
+
+    def post(self, request):
+        athlete_id = Athlete.objects.get(pk=id)
+        race_id = Race.objects.get(pk=id)
+        form = EnrollForm(request.POST)
+        if form.is_valid():
+            athlete_id = form.cleaned_data['athlete_id']
+            race_id = form.cleaned_data['race_id']
+            if Race.objects.filter(pk=request.race.id, participants=athlete_id):
+                form.add_error("Już zapisałaś/zapisałeś się na te zawody")
+
+            if not form.errors:
+                race_id = Race.objects.filter(pk=request.race.pk).create(participants=athlete_id)
+        ctx = {'athlete_id': athlete_id, 'race_id': race_id, }
+        return render(request, 'race_details.html', ctx)

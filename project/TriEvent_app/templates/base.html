@@ -29,7 +29,7 @@
             <a href="{% url 'find-race' %}">Znajdź zawody</a>
             <a href="{% url 'my-races' %}">Moje zawody</a>
             <a href="{% url 'my-results' %}">Moje wyniki</a>
-            <a href="{% url 'my-profile' %}">Profil</a>
+            <a href="/my/profile/{{user.id}}">Profil</a>
         </div>
             <div class="inner-header-text">
                 <a href="{% url 'homepage' %}">
@@ -43,7 +43,7 @@
         {% block content %}
         <div class="welcome-text">
             <h2>Witaj w TriEvent!</h2>
-            <p>Znajdź zawody, wystartuj, zostań mistrzem!</p>
+            <h2>Znajdź zawody, wystartuj, zostań mistrzem!</h2>
         </div>
         {% endblock %}
     </div>

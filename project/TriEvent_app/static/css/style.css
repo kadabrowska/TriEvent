@@ -176,7 +176,6 @@ body {
   border: 3px solid whitesmoke;
   color: black;
 }
-
 /* races list page */
 .races-list ul{
   list-style: none;
@@ -234,9 +233,22 @@ body {
   text-align: left;
   margin: 10px;
 }
-.rating-box textarea {
-  width: 95%;
+.comment-box input {
+  width: 70%;
   background: whitesmoke;
-  height: 150px;
-  margin: 10px;
+  height: 100px;
+  margin: 5px;
+  font-size: 15px;
+  font-weight: bold;
+}
+/* race details page */
+.enroll-button {
+  width: 150px;
+  height: auto;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+  background: lightgray;
+  border: 3px solid whitesmoke;
+  border-radius: 5px;
 }
