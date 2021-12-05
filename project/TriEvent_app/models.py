@@ -60,7 +60,7 @@ RATING = (
 
 
 class Athlete(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     proficiency = models.CharField(choices=PROFICIENCY, max_length=30, default=None)

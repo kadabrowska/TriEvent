@@ -1,7 +1,7 @@
 from django.contrib.auth.hashers import check_password
 from django.urls import reverse
 
-from TriEvent_app.models import User, Athlete
+from TriEvent_app.models import User, Athlete, Race
 import pytest
 
 # models test
@@ -37,15 +37,43 @@ def test_add_user(web_client):
 
 
 @pytest.mark.django_db
-def test_athlete_details_view(web_client, athlete):
-    result = web_client.get(reverse('my-profile', args=[athlete.id]))
-    assert result.context['first_name'] == athlete.first_name
-    assert result.context['last_name'] == athlete.last_name
-    assert result.context['proficiency'] == athlete.proficiency
-    assert result.context['age_group'] == athlete.age_group
-    assert result.context['created'] == athlete.created
-    assert result.context['updated'] == athlete.updated
-    assert result.context['last_login'] == athlete.last_login
+def test_add_race(web_client):
+    assert Race.objects.count() == 0
+    name = 'Garmin Iron Triathlon Skierniewice 2022'
+    organiser = 'Garmin'
+    distance = '5'
+    city = 'Skierniewice'
+    voivodeship = '5'
+    description = 'Garmin Iron Triathlon Skierniewice 2022 zostanie rozegrany na ' \
+                  'trzech dystansach: 1/2 IM, 1/4 IM oraz 1/8 IM! Na każdym z dystansów' \
+                  ' będzie można wystartować w trzyosobowej sztafecie triathlonowej.'
+    race_url = 'https://irontriathlon.pl/skierniewice-menu/'
+    date = '2022-07-03'
+    post_data = {
+        'name': name,
+        'organiser': organiser,
+        'distance': distance,
+        'city': city,
+        'voivodeship': voivodeship,
+        'description': description,
+        'race_url': race_url,
+        'date': date
+    }
+
+    response = web_client.post(reverse('races')),
+
+    assert Race.objects.count() == 1
+    race = Race.objects.first()
+    assert race.name == name
+    assert race.organiser == organiser
+    assert race.distance == distance
+    assert race.city == city
+    assert race.voivodeship == voivodeship
+    assert race.description == description
+    assert race.race_url == race_url
+    assert race.date == date
+
+
 
 
 
