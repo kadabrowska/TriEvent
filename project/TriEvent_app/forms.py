@@ -35,6 +35,7 @@ class EnrollForm(forms.Form):
     athlete_id = forms.CharField(max_length=255, widget=forms.HiddenInput)
     race_id = forms.CharField(max_length=255, widget=forms.HiddenInput)
 
+
 # class ReviewForm(forms.Form):
 #     rating = forms.ChoiceField(choices=RATING, label='Ocena:')
 #     comment = forms.CharField(widget=forms.Textarea, label="Napisz coś...")

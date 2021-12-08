@@ -85,7 +85,7 @@ class RegistrationView(View):
             return render(request, "registration_page.html", ctx)
 
         else:
-            return redirect('registration', {"form":form} )
+            return redirect('registration', {"form": form})
 
 
 class LoginView(View):
@@ -140,20 +140,27 @@ class MyProfileView(View):
 class EnrollView(View):
     def get(self, request):
         form = EnrollForm()
-        ctx = { 'form': form }
+        ctx = {'form': form}
         return render(request, 'race_details.html', ctx)
 
     def post(self, request):
-        athlete_id = Athlete.objects.get(pk=id)
-        race_id = Race.objects.get(pk=id)
         form = EnrollForm(request.POST)
         if form.is_valid():
             athlete_id = form.cleaned_data['athlete_id']
             race_id = form.cleaned_data['race_id']
-            if Race.objects.filter(pk=request.race.id, participants=athlete_id):
-                form.add_error("Już zapisałaś/zapisałeś się na te zawody")
+            Race.objects.create(participants=athlete_id, race_id=race_id)
 
-            if not form.errors:
-                race_id = Race.objects.filter(pk=request.race.pk).create(participants=athlete_id)
-        ctx = {'athlete_id': athlete_id, 'race_id': race_id, }
-        return render(request, 'race_details.html', ctx)
+            ctx = {"form": form}
+            return render(request, "race_details.html", ctx)
+        else:
+            return redirect('race_details.html')
+
+
+
+
+
+
+
+
+
+

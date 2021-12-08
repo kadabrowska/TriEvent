@@ -8,7 +8,7 @@
     <p> Zapisy -> <a href='{{ race.race_url }}'>tutaj</a></p>
     {% if user.is_authenticated %}
     <h3>
-        <form action="#" method="post">
+        <form action="" method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Biorę udział!" class="enroll-button">

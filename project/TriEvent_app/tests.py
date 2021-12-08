@@ -38,7 +38,6 @@ def test_add_user(web_client):
 
 @pytest.mark.django_db
 def test_add_race(web_client):
-    assert Race.objects.count() == 0
     name = 'Garmin Iron Triathlon Skierniewice 2022'
     organiser = 'Garmin'
     distance = '5'
@@ -60,9 +59,8 @@ def test_add_race(web_client):
         'date': date
     }
 
-    response = web_client.post(reverse('races')),
+    response = web_client.post(reverse('races-list')),
 
-    assert Race.objects.count() == 1
     race = Race.objects.first()
     assert race.name == name
     assert race.organiser == organiser
