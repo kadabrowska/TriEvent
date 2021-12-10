@@ -139,7 +139,7 @@ class MyProfileView(View):
 
 class EnrollView(View):
     def get(self, request):
-        form = EnrollForm()
+        form = EnrollForm(initial={"athlete_id": request.user.id, "race_id": request.race.id})
         ctx = {'form': form}
         return render(request, 'race_details.html', ctx)
 
@@ -148,8 +148,8 @@ class EnrollView(View):
         if form.is_valid():
             athlete_id = form.cleaned_data['athlete_id']
             race_id = form.cleaned_data['race_id']
-            Race.objects.create(participants=athlete_id, race_id=race_id)
-
+            p = Race(participants='athlete_id')
+            p.save()
             ctx = {"form": form}
             return render(request, "race_details.html", ctx)
         else:
