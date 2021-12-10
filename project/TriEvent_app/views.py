@@ -178,22 +178,22 @@ class EnrollView(View):
     It saves the race in the athlete's races.
     """
     def get(self, request, race_id):
-        form = EnrollForm(initial={"athlete_id": request.user.id, "race_id": race_id})
+        form = EnrollForm(initial={"athlete_id": request.athlete.user_id, "race_id": race_id})
         ctx = {'form': form}
         return render(request, 'race_details.html', ctx)
 
-    def post(self, request, race_id):
+    def post(self, request, race_id, user_id):
+        race = Race.objects.get(pk=race_id)
+        athlete = Athlete.objects.get(user_id=user_id)
         form = EnrollForm(request.POST)
         if form.is_valid():
-            race_id = form.cleaned_data['race_id']
-            athlete_id = form.cleaned_data['athlete_id']
-            race = Race.objects.get(pk=race_id)
-            athlete = Athlete.objects.get(pk=athlete_id)
             race.participants.add(athlete)
             ctx = {'form': form}
             return render(request, 'race_details.html', ctx)
+        if Race.objects.filter(race_id=race, participants=athlete):
+            form.add_error(None, "Już zapisałeś/aś te zawody!")
         else:
-            return render('race_details.html')
+            return render(request, 'race_details.html')
 
 
 

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{% endblock title %}
+{% block content %}
+<div class="search-form-box">
+    <h3>{{user.username}}, dodałeś/aś {{race.name}} do swojej listy!
+        <br>
+        <br>
+        <br>
+Przejdź <a href="{% url 'my-races' %}">tutaj</a>
+</h3>
+</div>
+{% endblock %}
