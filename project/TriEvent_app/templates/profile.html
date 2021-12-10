@@ -3,7 +3,7 @@
 {% block content %}
     {% if user.is_authenticated %}
 <div class="form-box">
-    <h3>Twój profil</h3>
+    <h3>Mój profil</h3>
     <p class="profile-description">Imię: {{ user.athlete.first_name }}<br>
     Nazwisko: {{ user.athlete.last_name }}<br>
     Login: {{ user.username }}<br>

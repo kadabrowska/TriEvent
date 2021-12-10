@@ -9,11 +9,17 @@ from TriEvent_app.models import Athlete, Race
 
 
 class HomepageView(View):
+    """
+    Homepage view.
+    """
     def get(self, request):
         return render(request, "base.html")
 
 
 class FindRaceView(View):
+    """
+    Searching for races by distance, organiser and voivodeship.
+    """
     def get(self, request):
         form = FindRaceForm()
         ctx = {'form': form}
@@ -21,6 +27,10 @@ class FindRaceView(View):
 
 
 class RacesListView(View):
+    """
+    List of the races that meet the searching requirements.
+    If there are no races, the user gets information about it.
+    """
     def get(self, request):
         distance = request.GET.get('distance')
         voivodeship = request.GET.get('voivodeship')
@@ -39,6 +49,9 @@ class RacesListView(View):
 
 
 class RaceDetailsView(View):
+    """
+    Details of the chosen race, such as name, date, description, url.
+    """
     def get(self, request, race_id):
         race = Race.objects.get(id=race_id)
         ctx = {'race': race}
@@ -46,6 +59,10 @@ class RaceDetailsView(View):
 
 
 class RegistrationView(View):
+    """
+    User registration page. Email address cannot be duplicated.
+    After registration it redirects to registration success page.
+    """
     def get(self, request):
         form = RegistrationForm()
         ctx = {'form': form}
@@ -89,6 +106,9 @@ class RegistrationView(View):
 
 
 class LoginView(View):
+    """
+    Login form with username and password. It redirects to find-races afterwards.
+    """
     def get(self, request):
         form = LoginForm()
         ctx = {'form': form}
@@ -110,27 +130,42 @@ class LoginView(View):
 
 
 class RegistrationSuccessfulView(View):
+    """
+    Success page after registration.
+    """
     def get(self, request):
         return render(request, "registration_successful.html")
 
 
 class LogoutView(View):
+    """
+    Logout option.
+    """
     def get(self, request):
         logout(request)
         return redirect("login")
 
 
 class MyRacesView(View):
+    """
+    Shows races of the logged in athlete.
+    """
     def get(self, request):
         return render(request, 'my_races.html')
 
 
 class MyResultsView(View):
+    """
+    Shows results of the races the athlete was enrolled to.
+    """
     def get(self, request):
         return render(request, 'my_results.html')
 
 
 class MyProfileView(View):
+    """
+    Shows data of the athlete.
+    """
     def get(self, request, user_id):
         athlete = User.objects.get(id=user_id)
         ctx = {'athlete': athlete}
@@ -138,22 +173,30 @@ class MyProfileView(View):
 
 
 class EnrollView(View):
-    def get(self, request):
-        form = EnrollForm(initial={"athlete_id": request.user.id, "race_id": request.race.id})
+    """
+    Enroll button on the race-details page.
+    It saves the race in the athlete's races.
+    """
+    def get(self, request, race_id):
+        form = EnrollForm(initial={"athlete_id": request.user.id, "race_id": race_id})
         ctx = {'form': form}
         return render(request, 'race_details.html', ctx)
 
-    def post(self, request):
+    def post(self, request, race_id):
         form = EnrollForm(request.POST)
         if form.is_valid():
-            athlete_id = form.cleaned_data['athlete_id']
             race_id = form.cleaned_data['race_id']
-            p = Race(participants='athlete_id')
-            p.save()
-            ctx = {"form": form}
-            return render(request, "race_details.html", ctx)
+            athlete_id = form.cleaned_data['athlete_id']
+            race = Race.objects.get(pk=race_id)
+            athlete = Athlete.objects.get(pk=athlete_id)
+            race.participants.add(athlete)
+            ctx = {'form': form}
+            return render(request, 'race_details.html', ctx)
         else:
-            return redirect('race_details.html')
+            return render('race_details.html')
+
+
+
 
 
 

@@ -32,8 +32,8 @@ class FindRaceForm(forms.Form):
 
 
 class EnrollForm(forms.Form):
-    athlete_id = forms.CharField(max_length=255, widget=forms.HiddenInput, required=False)
-    race_id = forms.CharField(max_length=255, widget=forms.HiddenInput, required=False)
+    athlete_id = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    race_id = forms.IntegerField(widget=forms.HiddenInput, required=False)
 
 
 # class ReviewForm(forms.Form):

@@ -240,6 +240,7 @@ body {
   margin: 5px;
   font-size: 15px;
   font-weight: bold;
+  border: 2px solid whitesmoke;
 }
 /* race details page */
 .enroll-button {
