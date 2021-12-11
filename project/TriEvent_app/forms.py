@@ -46,11 +46,11 @@ class EnrollForm(forms.Form):
 class AddResultsForm(forms.Form):
     race_name = forms.IntegerField(widget=forms.HiddenInput, required=False)
     player_name = forms.IntegerField(widget=forms.HiddenInput, required=False)
-    swim = forms.TimeField(label='pływanie', required=True)
-    T1 = forms.TimeField(label='T1', required=True)
-    bike = forms.TimeField(label='rower', required=True)
-    T2 = forms.TimeField(label='T2', required=True)
-    run = forms.TimeField(label='bieg', required=True)
+    swim = forms.CharField(max_length=9, label='pływanie', required=True)
+    T1 = forms.CharField(max_length=9, label='T1', required=True)
+    bike = forms.CharField(max_length=9, label='rower', required=True)
+    T2 = forms.CharField(max_length=9, label='T2', required=True)
+    run = forms.CharField(max_length=9, label='bieg', required=True)
 
 # class ReviewForm(forms.Form):
 #     rating = forms.ChoiceField(choices=RATING, label='Ocena:')

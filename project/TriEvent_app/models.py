@@ -83,8 +83,8 @@ class Race(models.Model):
 
 
 class Results(models.Model):
-    race_name = models.ForeignKey(Race, on_delete=models.CASCADE)
-    player_name = models.ForeignKey(Athlete, on_delete=models.CASCADE)
+    race = models.ForeignKey(Race, on_delete=models.CASCADE)
+    athlete = models.ForeignKey(Athlete, on_delete=models.CASCADE)
     swim = models.TimeField()
     T1 = models.TimeField()
     bike = models.TimeField()

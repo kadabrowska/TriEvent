@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -146,7 +147,7 @@ class LogoutView(View):
         return redirect("login")
 
 
-class MyRacesView(View):
+class MyRacesView(LoginRequiredMixin, View):
     """
     Shows races of the logged in athlete.
     """
@@ -157,7 +158,7 @@ class MyRacesView(View):
         return render(request, 'my_races.html', ctx)
 
 
-class AddResultsView(View):
+class AddResultsView(LoginRequiredMixin, View):
     def get(self, request, race_id):
         race = Race.objects.get(id=race_id)
         athlete = request.user.athlete.id
@@ -173,31 +174,41 @@ class AddResultsView(View):
             bike = form.cleaned_data['bike']
             T2 = form.cleaned_data['T2']
             run = form.cleaned_data['run']
-            results = Results.objects.all()
-            race = Race.objects.get(pk=race_id)
-            athlete = request.user.athlete.id
-            results.race_name.add(race)
-            results.player_name.add(athlete)
-            results.swim.add(swim)
-            results.T1.add(T1)
-            results.bike.add(bike)
-            results.T2.add(T2)
-            results.run.add(run)
-        ctx = {'form': form}
-        return render(request, 'add_results.html', ctx)
+            race_id = Race.objects.get(pk=race_id)
+            athlete_id = Athlete.objects.get(pk=request.user.athlete.id)
+            if Results.objects.filter(race=race_id, athlete=athlete_id):
+                form.add_error(None, "Już masz dodane wyniki do tych zawodów.")
+            if not form.errors:
+                Results.objects.update_or_create(
+                    race=race_id,
+                    athlete=athlete_id,
+                    swim=swim,
+                    T1=T1,
+                    bike=bike,
+                    T2=T2,
+                    run=run)
+            ctx = {'form': form}
+            return redirect('my-results')
+        else:
+            return render(request, 'add_results.html')
 
 
-class MyResultsView(View):
+class MyResultsView(LoginRequiredMixin, View):
     """
     Shows results of the races the athlete was enrolled to.
+    Only for authenticated users.
     """
     def get(self, request):
-        return render(request, 'my_results.html')
+        athlete = request.user.athlete.id
+        results = Results.objects.filter(athlete=athlete)
+        ctx = {'results': results}
+        return render(request, 'my_results.html', ctx)
 
 
-class MyProfileView(View):
+class MyProfileView(LoginRequiredMixin, View):
     """
     Shows data of the athlete.
+    Only for authenticated users.
     """
     def get(self, request, user_id):
         athlete = User.objects.get(id=user_id)
@@ -205,10 +216,11 @@ class MyProfileView(View):
         return render(request, 'profile.html', ctx)
 
 
-class EnrollView(View):
+class EnrollView(LoginRequiredMixin, View):
     """
     Enroll button on the race-details page.
     It saves the race in the athlete's races.
+    Only for authenticated users.
     """
     def get(self, request, race_id, user_id):
         form = EnrollForm(initial={"athlete_id": user_id, "race_id": race_id})
@@ -233,8 +245,8 @@ class EnrollView(View):
 class ParticipantsListView(View):
     def get(self, request, race_id):
         race = Race.objects.get(pk=race_id)
-        participants = race.values_list('participants', flat=True)
-        ctx = {'participants': participants}
+        athletes = Race.objects.filter(id=race).get()
+        ctx = {'athletes': athletes}
         return render(request, 'participants', ctx)
 
 

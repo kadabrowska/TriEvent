@@ -20,8 +20,8 @@
     <br>
     <div class="box-container">
         <div class="enrolled-box">W tych zawodach startują:</div>
-        {% for participant in participants %}
-        {{participant.get_name_display}}
+        {% for athlete in athletes %}
+        {{athlete.first_name}}
         {% endfor %}
         <!--<div class="rating-box">Zostaw opinię:
             <form action="" method="POST">

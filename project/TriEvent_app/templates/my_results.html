@@ -5,6 +5,9 @@
 {% if user.is_authenticated %}
 <div>
     <h3>Moje wyniki</h3>
+    {% for result in results %}
+    {{result.race.name}} - {{result.swim}}-{{result.T1}}-{{result.bike}}-{{result.T2}}-{{result.run}}
+    {% endfor %}
     {% else %}
     <h3>Musisz się zalogować, aby zobaczyć swoje wyniki</h3>
 </div>
