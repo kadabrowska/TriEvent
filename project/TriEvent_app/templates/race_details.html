@@ -21,6 +21,7 @@
     <div class="box-container">
         <div class="enrolled-box">W tych zawodach startują:</div>
         {% for participant in participants %}
+        {{participant.get_name_display}}
         {% endfor %}
         <!--<div class="rating-box">Zostaw opinię:
             <form action="" method="POST">

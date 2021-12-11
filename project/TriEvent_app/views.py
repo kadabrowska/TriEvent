@@ -230,6 +230,15 @@ class EnrollView(View):
             return render(request, 'race_details.html')
 
 
+class ParticipantsListView(View):
+    def get(self, request, race_id):
+        race = Race.objects.get(pk=race_id)
+        participants = race.values_list('participants', flat=True)
+        ctx = {'participants': participants}
+        return render(request, 'participants', ctx)
+
+
+
 
 
 
