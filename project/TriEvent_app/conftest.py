@@ -1,4 +1,5 @@
 import pytest
+from django.contrib.auth.models import User
 from django.test import Client
 
 from TriEvent_app.models import Race
@@ -24,4 +25,16 @@ def new_race():
     r.save()
     return r
 
+
+@pytest.fixture
+def new_user(web_client):
+    user = User.objects.create_user(username="User", password='Password')
+    web_client.force_login(user)
+    return user
+
+
+@pytest.fixture
+def list_of_races():
+    races = Race.objects.all()
+    return list(races)
 

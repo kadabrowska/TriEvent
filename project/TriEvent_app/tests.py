@@ -1,10 +1,10 @@
+from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import check_password
 from django.urls import reverse
 
-from TriEvent_app.models import User, Athlete, Race
+from TriEvent_app.conftest import web_client, new_race
+from TriEvent_app.models import User, Race
 import pytest
-
-# models test
 
 
 @pytest.mark.django_db
@@ -37,39 +37,35 @@ def test_add_user(web_client):
 
 
 @pytest.mark.django_db
-def test_add_race(web_client):
-    name = 'Garmin Iron Triathlon Skierniewice 2022'
-    organiser = 'Garmin'
-    distance = '5'
-    city = 'Skierniewice'
-    voivodeship = '5'
-    description = 'Garmin Iron Triathlon Skierniewice 2022 zostanie rozegrany na ' \
-                  'trzech dystansach: 1/2 IM, 1/4 IM oraz 1/8 IM! Na każdym z dystansów' \
-                  ' będzie można wystartować w trzyosobowej sztafecie triathlonowej.'
-    race_url = 'https://irontriathlon.pl/skierniewice-menu/'
-    date = '2022-07-03'
+def test_login(web_client):
+    assert User.objects.count() == 0
+    User.objects.create_user(username="User", password="Password")
+    assert User.objects.count() == 1
     post_data = {
-        'name': name,
-        'organiser': organiser,
-        'distance': distance,
-        'city': city,
-        'voivodeship': voivodeship,
-        'description': description,
-        'race_url': race_url,
-        'date': date
+        'username': 'User',
+        'password': 'Password'
     }
+    response = web_client.post(reverse('login'), post_data)
+    assert response.status_code == 302
+    assert authenticate(username='User', password='Password')
 
-    response = web_client.post(reverse('races-list')),
 
-    race = Race.objects.first()
-    assert race.name == name
-    assert race.organiser == organiser
-    assert race.distance == distance
-    assert race.city == city
-    assert race.voivodeship == voivodeship
-    assert race.description == description
-    assert race.race_url == race_url
-    assert race.date == date
+@pytest.mark.django_db
+def test_logout(web_client, new_user):
+    assert new_user.is_authenticated
+    response = web_client.get(reverse('logout'))
+    assert response.status_code == 302
+
+
+@pytest.mark.django_db
+def test_races_list_view(web_client, list_of_races):
+    response = web_client.get('/races')
+    assert response.status_code == 301
+    races = response.context['races_list']
+    assert races == list_of_races
+
+
+
 
 
 

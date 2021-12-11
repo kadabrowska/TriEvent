@@ -2,24 +2,29 @@
 {% block title %}{% endblock title %}
 {% block content %}
 <div class="details-page">
-    <h2>{{ race.name }}</h2>
+    <h2>{{ race.name }} / dystans:{{race.get_distance_display}}</h2>
     <h3> {{ race.date }}</h3>
-    <p> {{ race.description}}</p>
+    <p> {{race.description}}</p>
     <p> Zapisy -> <a href='{{ race.race_url }}'>tutaj</a></p>
     {% if user.is_authenticated %}
-    <h3>
+    <h3>{% if not user.athlete in race.participants.all %}
         <form action="enroll/{{user.id}}" method="POST">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="submit" value="Biorę udział!" class="enroll-button">
         </form>
+        {% else %}
+        <h3>Te zawody są na Twojej liście!</h3>
+        {% endif %}
     </h3>
     <br>
     <div class="box-container">
         <div class="enrolled-box">W tych zawodach startują:</div>
-        <div class="rating-box">Zostaw opinię:
-            <!--<form action="" method="POST"> -->
-                <!-- {% csrf_token %} -->
+        {% for participant in participants %}
+        {% endfor %}
+        <!--<div class="rating-box">Zostaw opinię:
+            <form action="" method="POST">
+                 {% csrf_token %}
             <select>
                 <option value="1">słabo</option>
                 <option value="2">tak sobie</option>
@@ -31,7 +36,7 @@
                 <input type="textarea" value="Napisz coś...">
             </div>
             <input type="submit" value="Wyślij!">
-            <!-- </form> -->
+            </form> -->
         </div>
 
     </div>

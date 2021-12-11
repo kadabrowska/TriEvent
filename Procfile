@@ -1,1 +1,2 @@
-web: gunicorn project.wsgi --log-file -
+release: python manage.py migrate
+web: python manage.py runserver 0.0.0.0:$PORT

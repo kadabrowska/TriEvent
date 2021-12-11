@@ -3,6 +3,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
+from psycopg2 import extras
+
 from TriEvent_app.models import PROFICIENCY, AGE_GROUP, DISTANCE, VOIVODESHIP
 
 
@@ -35,6 +37,20 @@ class EnrollForm(forms.Form):
     athlete_id = forms.IntegerField(widget=forms.HiddenInput, required=False)
     race_id = forms.IntegerField(widget=forms.HiddenInput, required=False)
 
+
+# def validate_format():
+#     if format() != '%H:%M:%S':
+#         raise ValidationError("Czas podaj w formacie HH:MM:SS")
+
+
+class AddResultsForm(forms.Form):
+    race_name = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    player_name = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    swim = forms.TimeField(label='pływanie', required=True)
+    T1 = forms.TimeField(label='T1', required=True)
+    bike = forms.TimeField(label='rower', required=True)
+    T2 = forms.TimeField(label='T2', required=True)
+    run = forms.TimeField(label='bieg', required=True)
 
 # class ReviewForm(forms.Form):
 #     rating = forms.ChoiceField(choices=RATING, label='Ocena:')

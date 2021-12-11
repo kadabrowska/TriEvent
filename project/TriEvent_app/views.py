@@ -4,8 +4,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm, EnrollForm
-from TriEvent_app.models import Athlete, Race
+from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm, EnrollForm, AddResultsForm
+from TriEvent_app.models import Athlete, Race, Results
 
 
 class HomepageView(View):
@@ -151,7 +151,40 @@ class MyRacesView(View):
     Shows races of the logged in athlete.
     """
     def get(self, request):
-        return render(request, 'my_races.html')
+        athlete = request.user.athlete.id
+        races = Race.objects.filter(participants=athlete)
+        ctx = {'races': races}
+        return render(request, 'my_races.html', ctx)
+
+
+class AddResultsView(View):
+    def get(self, request, race_id):
+        race = Race.objects.get(id=race_id)
+        athlete = request.user.athlete.id
+        form = AddResultsForm()
+        ctx = {'form': form, 'race': race, 'athlete': athlete}
+        return render(request, 'add_results.html', ctx)
+
+    def post(self, request, race_id):
+        form = AddResultsForm(request.POST)
+        if form.is_valid():
+            swim = form.cleaned_data['swim']
+            T1 = form.cleaned_data['T1']
+            bike = form.cleaned_data['bike']
+            T2 = form.cleaned_data['T2']
+            run = form.cleaned_data['run']
+            results = Results.objects.all()
+            race = Race.objects.get(pk=race_id)
+            athlete = request.user.athlete.id
+            results.race_name.add(race)
+            results.player_name.add(athlete)
+            results.swim.add(swim)
+            results.T1.add(T1)
+            results.bike.add(bike)
+            results.T2.add(T2)
+            results.run.add(run)
+        ctx = {'form': form}
+        return render(request, 'add_results.html', ctx)
 
 
 class MyResultsView(View):
@@ -177,8 +210,8 @@ class EnrollView(View):
     Enroll button on the race-details page.
     It saves the race in the athlete's races.
     """
-    def get(self, request, race_id):
-        form = EnrollForm(initial={"athlete_id": request.athlete.user_id, "race_id": race_id})
+    def get(self, request, race_id, user_id):
+        form = EnrollForm(initial={"athlete_id": user_id, "race_id": race_id})
         ctx = {'form': form}
         return render(request, 'race_details.html', ctx)
 
@@ -188,10 +221,11 @@ class EnrollView(View):
         form = EnrollForm(request.POST)
         if form.is_valid():
             race.participants.add(athlete)
-            ctx = {'form': form}
-            return render(request, 'race_details.html', ctx)
+            ctx = {'form': form, 'race': race}
+            return render(request, 'enroll.html', ctx)
+
         if Race.objects.filter(race_id=race, participants=athlete):
-            form.add_error(None, "Już zapisałeś/aś te zawody!")
+            form.add_error(None, 'Już zapisałeś/aś te zawody!')
         else:
             return render(request, 'race_details.html')
 

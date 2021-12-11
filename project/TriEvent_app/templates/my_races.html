@@ -5,6 +5,9 @@
 {% if user.is_authenticated %}
 <div>
     <h3>Moje zawody</h3>
+    {% for race in races %}
+    <p>{{race.name}} {{race.get_distance_display}}  <a href="/add/results/{{ race.id }}/">dodaj wyniki</a></p>
+    {% endfor %}
     {% else %}
     <h3>Musisz się zalogować, aby zobaczyć zawody, w których bierzesz udział</h3>
 </div>
