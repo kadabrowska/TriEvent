@@ -2,7 +2,7 @@
 {% block title %}{% endblock title %}
 {% block content %}
 <div class="details-page">
-    <h2>{{ race.name }} / dystans:{{race.get_distance_display}}</h2>
+    <h2>{{ race.name }}  {{race.get_distance_display}}</h2>
     <h3> {{ race.date }}</h3>
     <p> {{race.description}}</p>
     <p> Zapisy -> <a href='{{ race.race_url }}'>tutaj</a></p>
@@ -19,10 +19,12 @@
     </h3>
     <br>
     <div class="box-container">
-        <div class="enrolled-box">W tych zawodach startują:</div>
+        <div class="enrolled-box">W tych zawodach startują:
         {% for athlete in athletes %}
-        {{athlete.first_name}}
-        {% endfor %}
+            <ul>
+                <li>{{athlete.first_name}} {{athlete.last_name}}</li>
+            </ul>
+        {% endfor %}</div>
         <!--<div class="rating-box">Zostaw opinię:
             <form action="" method="POST">
                  {% csrf_token %}

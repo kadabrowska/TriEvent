@@ -3,10 +3,36 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<div>
+<div class="my-results-box">
     <h3>Moje wyniki</h3>
-    {% for result in results %}
-    {{result.race.name}} - {{result.swim}}-{{result.T1}}-{{result.bike}}-{{result.T2}}-{{result.run}}
+    <table style="width: 100%;">
+        <colgroup>
+            <col span="1" style="width: 15%;">
+            <col span="6" style="width: 3%;">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>zawody</th>
+                <th>pływanie</th>
+                <th>T1</th>
+                <th>rower</th>
+                <th>T2</th>
+                <th>bieg</th>
+                <th>czas całkowity</th>
+            </tr>
+        </thead>
+        {% for result in results %}
+        <tbody>
+            <tr>
+                <td>{{result.race.name}} {{result.race.get_distance_display}}</td>
+                <td>{{result.swim|time:"H:i:s"}}</td>
+                <td>{{result.T1|time:"H:i:s"}}</td>
+                <td>{{result.bike|time:"H:i:s"}}</td>
+                <td>{{result.T2|time:"H:i:s"}}</td>
+                <td>{{result.run|time:"H:i:s"}}</td>
+                <td>{{total_time|time:"H:i:s"}}</td>
+            </tr>
+        </tbody>
     {% endfor %}
     {% else %}
     <h3>Musisz się zalogować, aby zobaczyć swoje wyniki</h3>

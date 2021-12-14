@@ -5,7 +5,7 @@
 {% for race in races_list %}
 <div class='races-list'>
     <ul>
-    <li><a href='details/{{race.id}}'>{{race.name}}</a></li>
+    <li><a href='details/{{race.id}}'>{{race.name}} {{ race.get_distance_display}}</a></li>
     </ul>
 </div>
 {% empty %}

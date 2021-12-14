@@ -60,6 +60,8 @@ def test_logout(web_client, new_user):
 @pytest.mark.django_db
 def test_races_list_view(web_client, list_of_races):
     response = web_client.get('/races')
+    # assert response.url == ""
+    # web_client.login('username'="User", 'password'="Password")
     assert response.status_code == 301
     races = response.context['races_list']
     assert races == list_of_races

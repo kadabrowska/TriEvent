@@ -8,8 +8,7 @@ body {
   width: 100%;
   height: 100px;
   display: block;
-  background-color: black;
-  opacity: 0.6;
+  background-color: rgba(13, 13, 13, 0.7);
   position: fixed;
   left: 0;
   top: 0;
@@ -55,7 +54,7 @@ body {
   font-size: 20px;
   font-weight: bold;
   padding: 2px;
-  background-color: black;
+  background-color: transparent;
   color: whitesmoke;
   font-family: 'Montserrat', sans-serif;
   border: 1px solid transparent;
@@ -91,7 +90,7 @@ body {
   text-align: center;
   color: whitesmoke;
   display: inline-block;
-  background-color: black;
+  background-color: transparent;
   transition: 1s;
 }
 .navbar a:hover {
@@ -102,24 +101,24 @@ body {
 .container {
   position: relative;
   overflow: hidden;
-  width: 1100px;
-  height: 550px;
-  top: 60px;
-  margin-top: 50px;
-  margin-left: 110px;
-  margin-bottom: 50px;
-  padding: 50px;
+  width: 1250px;
+  height: 650px;
+  top: 80px;
+  margin: 80px;
+  padding-top: 5px;
   border-radius: 5px 5px;
+  background: rgba(13, 13, 13, 0.3);
 }
 .container .box {
   position: absolute;
-  width: 1040px;
+  width: 1100px;
   height: 90%;
   font-family: 'Montserrat', sans-serif;
   font-size: 18px;
   color: white;
-  padding: 15px;
-  margin: 15px;
+  padding: 5px 35px 5px 35px;
+  margin: 30px;
+  background: transparent;
 }
 .box h3 {
   text-align: center;
@@ -135,10 +134,9 @@ body {
 }
 .form-box {
   position: absolute;
-  height: 560px;
+  height: 580px;
   width: 380px;
-  background: transparent;
-  border: 3px solid dimgray;
+  background: rgba(13, 13, 13, 0.4);
   border-radius: 5px 5px;
   padding-left: 15px;
   padding-top: 2px;
@@ -149,10 +147,17 @@ body {
   line-height: 30px;
 }
 .form-box input {
-  width: 340px;
+  width: 250px;
   height: 18px;
+  margin-right: 80px;
+  margin-left: 50px;
   border-radius: 5px 5px;
 }
+.form-box label {
+  margin-right: 80px;
+  margin-left: 50px;
+}
+
 .form-box input:hover {
   border: 2px solid dimgrey;
   background: lightgrey;
@@ -176,11 +181,88 @@ body {
   border: 3px solid whitesmoke;
   color: black;
 }
+.form-box p select {
+  margin-right: 80px;
+  margin-left: 50px;
+  width: 250px;
+  height: 25px;
+  border-radius: 5px 5px;
+  font-size: 16px;
+  -webkit-appearance: none;
+  background-image: url("/static/images/arrow.png");
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: calc(100% - 3px) center;
+  padding: 2px;
+}
+/* find race form-box */
+.form-box-find-race {
+  position: absolute;
+  height: 580px;
+  width: 380px;
+  background: rgba(13, 13, 13, 0.4);
+  border-radius: 5px 5px;
+  padding-left: 15px;
+  padding-top: 2px;
+  left: 35%;
+  font-family: 'Montserrat', sans-serif;
+}
+.form-box-find-race input {
+  width: 250px;
+  height: 18px;
+  margin-right: 120px;
+  border-radius: 5px 5px;
+}
+.form-box-find-race input:hover {
+  border: 2px solid dimgrey;
+  background: lightgrey;
+}
+.form-box-find-race .reg-button {
+  width: 200px;
+  height: auto;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 5px;
+  background-color: dimgrey;
+  color: whitesmoke;
+  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+  border-radius: 10px;
+  border: 3px solid dimgrey;
+  margin-left: 80px;
+}
+.form-box-find-race .reg-button:hover {
+  background-color: whitesmoke;
+  border: 3px solid whitesmoke;
+  color: black;
+}
+.form-box-find-race p select {
+  margin-right: 80px;
+  margin-left: 50px;
+  width: 250px;
+  height: 25px;
+  border-radius: 5px 5px;
+  font-size: 16px;
+  -webkit-appearance: none;
+  background-image: url("/static/images/arrow.png");
+  background-repeat: no-repeat;
+  background-size: 15px;
+  background-position: calc(100% - 3px) center;
+  padding: 2px;
+}
+.form-box-find-race input {
+  margin-right: 80px;
+  margin-left: 50px;
+}
+.form-box-find-race label {
+  margin-right: 80px;
+  margin-left: 50px;
+}
+
 /* races list page */
-.races-list ul{
+.races-list ul {
   list-style: none;
 }
-.races-list ul li a{
+.races-list ul li a {
   text-decoration: none;
   color: whitesmoke;
   font-family: 'Montserrat', sans-serif;
@@ -189,6 +271,59 @@ body {
 .races-list ul li a:hover {
   color: lightgray;
 }
+.all-races {
+  position: center;
+}
+.all-races a {
+  width: 200px;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 5px 20px 5px 20px;
+  background-color: dimgrey;
+  color: whitesmoke;
+  font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
+  border-radius: 10px;
+  border: 3px solid dimgrey;
+  text-decoration: none;
+}
+.all-races a:hover {
+  background-color: whitesmoke;
+  border: 3px solid whitesmoke;
+  color: black;
+}
+/* my races list */
+.my-races-box table {
+  background: rgba(13, 13, 13, 0.4);
+  padding: 10px;
+  height: auto;
+}
+.my-races-box a {
+  text-decoration: none;
+  color: whitesmoke;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  border: 2px solid whitesmoke;
+  border-radius: 5px;
+  background-color: dimgrey;
+  font-size: 15px;
+  padding: 3px 5px 3px 5px;
+}
+.my-races-box a:hover {
+  color: black;
+  border-color: black;
+  background: whitesmoke;
+}
+/* my results page */
+.my-results-box table {
+  background: rgba(13, 13, 13, 0.4);
+  padding: 5px;
+  text-align: center;
+}
+.my-results-box table td {
+  background: rgba(64, 64, 64, 0.4);
+  padding: 2px;
+}
+/* details page */
 .details-page h2 {
   text-align: center;
 }
@@ -196,33 +331,42 @@ body {
   text-decoration: none;
   font-weight: bold;
   color: whitesmoke;
+  border: 2px solid whitesmoke;
+  border-radius: 5px;
+  background: dimgray;
+  padding: 2px 10px 2px 10px;
 }
 .details-page a:hover {
-  color: lightgray;
+  color: black;
+  border-color: black;
+  background: whitesmoke;
 }
 .box-container {
   width: 100%;
   height: auto;
   display: flex;
   position: absolute;
-  opacity: 0.6;
   margin-top: 5px;
 }
 .enrolled-box {
   width: 47%;
   height: auto;
   text-align: center;
-  background: black;
+  background: rgba(13, 13, 13, 0.5);
   margin-right: 3%;
   opacity: revert;
   position: relative;
   border-radius: 5px;
   padding: 5px;
 }
+.enrolled-box ul {
+  list-style: none;
+  text-align: left;
+}
 .rating-box {
   width: 47%;
   text-align: center;
-  background: black;
+  background: rgba(13, 13, 13, 0.5);
   margin-left: 3%;
   height: auto;
   position: relative;
@@ -252,4 +396,18 @@ body {
   background: lightgray;
   border: 3px solid whitesmoke;
   border-radius: 5px;
+}
+.search-form-box a {
+  text-decoration: none;
+  font-weight: bold;
+  color: whitesmoke;
+  border: 2px solid whitesmoke;
+  border-radius: 5px;
+  background: dimgray;
+  padding: 2px 10px 2px 10px;
+}
+.search-form-box a:hover {
+  color: black;
+  border-color: black;
+  background: whitesmoke;
 }

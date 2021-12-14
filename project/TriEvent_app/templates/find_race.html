@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% block title %}{% endblock title %}
 {% block content %}
-<div class="form-box">
+<div class="form-box-find-race">
     <h3 class="search-title">Znajdź zawody</h3>
 <form action="{% url 'races-list' %}" method="get">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Szukaj" class="reg-button">
 </form>
+    <h3>lub sprawdź</h3>
+    <h3 class="all-races"><a href="{% url 'races-list' %}">Wszystkie zawody</a></h3>
 </div>
 
 {% endblock %}

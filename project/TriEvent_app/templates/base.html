@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>TriEvent</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     {% block head %}{% endblock %}
@@ -29,7 +29,9 @@
             <a href="{% url 'find-race' %}">Znajdź zawody</a>
             <a href="{% url 'my-races' %}">Moje zawody</a>
             <a href="{% url 'my-results' %}">Moje wyniki</a>
+            {% if user.is_authenticated %}
             <a href="/my/profile/{{user.id}}">Profil</a>
+            {% endif %}
         </div>
             <div class="inner-header-text">
                 <a href="{% url 'homepage' %}">

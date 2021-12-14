@@ -3,10 +3,23 @@
 {% block content %}
 
 {% if user.is_authenticated %}
-<div>
+<div class="my-races-box">
     <h3>Moje zawody</h3>
     {% for race in races %}
-    <p>{{race.name}} {{race.get_distance_display}}  <a href="/add/results/{{ race.id }}/">dodaj wyniki</a></p>
+    <table style="width: 100%;">
+        <colgroup>
+            <col span="1" style="width: 30%;">
+            <col span="3" style="width: 10%;">
+        </colgroup>
+        <tbody>
+            <tr>
+                <td>{{race.name}} {{race.get_distance_display}}</td>
+                <td><a href="/add/results/{{ race.id }}/">dodaj wyniki</a></td>
+                <td><a href="/delete/{{ race.id }}/">usuń z listy</a></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
     {% endfor %}
     {% else %}
     <h3>Musisz się zalogować, aby zobaczyć zawody, w których bierzesz udział</h3>

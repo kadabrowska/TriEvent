@@ -35,6 +35,6 @@ def new_user(web_client):
 
 @pytest.fixture
 def list_of_races():
-    races = Race.objects.all()
-    return list(races)
+    races_list = Race.objects.all()
+    return races_list
 

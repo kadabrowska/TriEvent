@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -55,7 +56,8 @@ class RaceDetailsView(View):
     """
     def get(self, request, race_id):
         race = Race.objects.get(id=race_id)
-        ctx = {'race': race}
+        athletes = race.participants.all()
+        ctx = {'race': race, 'athletes': athletes}
         return render(request, "race_details.html", ctx)
 
 
@@ -103,7 +105,7 @@ class RegistrationView(View):
             return render(request, "registration_page.html", ctx)
 
         else:
-            return redirect('registration', {"form": form})
+            return redirect('registration')
 
 
 class LoginView(View):
@@ -158,6 +160,18 @@ class MyRacesView(LoginRequiredMixin, View):
         return render(request, 'my_races.html', ctx)
 
 
+class DeleteMyRaceView(View):
+    """
+    Deleting races from the list.
+    """
+    def get(self, request, race_id):
+        athlete = request.user.athlete.id
+        race = Race.objects.filter(pk=race_id)
+        participants = Race.objects.filter(participants=athlete)
+        participants.delete(athlete, race)
+        return redirect('my-races')
+
+
 class AddResultsView(LoginRequiredMixin, View):
     def get(self, request, race_id):
         race = Race.objects.get(id=race_id)
@@ -176,10 +190,8 @@ class AddResultsView(LoginRequiredMixin, View):
             run = form.cleaned_data['run']
             race_id = Race.objects.get(pk=race_id)
             athlete_id = Athlete.objects.get(pk=request.user.athlete.id)
-            if Results.objects.filter(race=race_id, athlete=athlete_id):
-                form.add_error(None, "Już masz dodane wyniki do tych zawodów.")
-            if not form.errors:
-                Results.objects.update_or_create(
+            if Results.objects.filter(race=None, athlete=None):
+                Results.objects.create(
                     race=race_id,
                     athlete=athlete_id,
                     swim=swim,
@@ -187,7 +199,15 @@ class AddResultsView(LoginRequiredMixin, View):
                     bike=bike,
                     T2=T2,
                     run=run)
-            ctx = {'form': form}
+            else:
+                Results.objects.update(
+                    race=race_id,
+                    athlete=athlete_id,
+                    swim=swim,
+                    T1=T1,
+                    bike=bike,
+                    T2=T2,
+                    run=run)
             return redirect('my-results')
         else:
             return render(request, 'add_results.html')
@@ -201,6 +221,7 @@ class MyResultsView(LoginRequiredMixin, View):
     def get(self, request):
         athlete = request.user.athlete.id
         results = Results.objects.filter(athlete=athlete)
+        race = Race.objects.filter(participants=athlete)
         ctx = {'results': results}
         return render(request, 'my_results.html', ctx)
 
@@ -235,19 +256,9 @@ class EnrollView(LoginRequiredMixin, View):
             race.participants.add(athlete)
             ctx = {'form': form, 'race': race}
             return render(request, 'enroll.html', ctx)
-
-        if Race.objects.filter(race_id=race, participants=athlete):
-            form.add_error(None, 'Już zapisałeś/aś te zawody!')
         else:
             return render(request, 'race_details.html')
 
-
-class ParticipantsListView(View):
-    def get(self, request, race_id):
-        race = Race.objects.get(pk=race_id)
-        athletes = Race.objects.filter(id=race).get()
-        ctx = {'athletes': athletes}
-        return render(request, 'participants', ctx)
 
 
 

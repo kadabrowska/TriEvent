@@ -2,7 +2,7 @@
 {% block title %}{% endblock title %}
 {% block content %}
 <div class="form-box">
-    <h3>Dodaj swoje wyniki do {{race.name}}</h3>
+    <h3>Dodaj swoje wyniki do {{race.name}} {{race.get_distance_display}}</h3>
 <form action="" method="post">
     {% csrf_token %}
     {{ form.as_p }}
