@@ -297,7 +297,7 @@ body {
   padding: 10px;
   height: auto;
 }
-.my-races-box a {
+.my-races-box .two a {
   text-decoration: none;
   color: whitesmoke;
   font-family: 'Montserrat', sans-serif;
@@ -308,10 +308,19 @@ body {
   font-size: 15px;
   padding: 3px 5px 3px 5px;
 }
-.my-races-box a:hover {
+.my-races-box .two a:hover {
   color: black;
   border-color: black;
   background: whitesmoke;
+}
+.my-races-box .one a {
+  text-decoration: none;
+  color: whitesmoke;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+.my-races-box .one a:hover {
+  color: lightgray;
 }
 /* my results page */
 .my-results-box table {

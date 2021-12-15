@@ -13,9 +13,9 @@
         </colgroup>
         <tbody>
             <tr>
-                <td>{{race.name}} {{race.get_distance_display}}</td>
-                <td><a href="/add/results/{{ race.id }}/">dodaj wyniki</a></td>
-                <td><a href="/delete/{{ race.id }}/">usuń z listy</a></td>
+                <td class="one"><a href='/races/details/{{race.id}}'>{{race.name}} {{race.get_distance_display}}</a></td>
+                <td class="two"><a href="/add/results/{{ race.id }}/">dodaj wyniki</a></td>
+                <td class="two"><a href="/delete/{{ race.id }}/">usuń z listy</a></td>
                 <td></td>
             </tr>
         </tbody>

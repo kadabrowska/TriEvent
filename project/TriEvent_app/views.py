@@ -166,9 +166,8 @@ class DeleteMyRaceView(View):
     """
     def get(self, request, race_id):
         athlete = request.user.athlete.id
-        race = Race.objects.filter(pk=race_id)
-        participants = Race.objects.filter(participants=athlete)
-        participants.delete(athlete, race)
+        race = Race.objects.get(pk=race_id)
+        race.participants.remove(athlete)
         return redirect('my-races')
 
 
