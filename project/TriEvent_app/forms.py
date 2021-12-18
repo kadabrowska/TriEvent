@@ -44,8 +44,8 @@ class EnrollForm(forms.Form):
 
 
 class AddResultsForm(forms.Form):
-    race_name = forms.IntegerField(widget=forms.HiddenInput, required=False)
-    player_name = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    race = forms.IntegerField(widget=forms.HiddenInput, required=False)
+    athlete = forms.IntegerField(widget=forms.HiddenInput, required=False)
     swim = forms.TimeField(label='pływanie', required=True, widget=forms.TimeInput(format='%H:%M:%S'))
     T1 = forms.TimeField(label='T1', required=True, widget=forms.TimeInput(format='%H:%M:%S'))
     bike = forms.TimeField(label='rower', required=True, widget=forms.TimeInput(format='%H:%M:%S'))

@@ -327,7 +327,9 @@ body {
   background: rgba(13, 13, 13, 0.4);
   padding: 5px;
   text-align: center;
+  width: 100%;
 }
+
 .my-results-box table td {
   background: rgba(64, 64, 64, 0.4);
   padding: 2px;

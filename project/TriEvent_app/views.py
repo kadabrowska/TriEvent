@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
@@ -172,6 +171,9 @@ class DeleteMyRaceView(View):
 
 
 class AddResultsView(LoginRequiredMixin, View):
+    """
+    Adding  results to a particular race.
+    """
     def get(self, request, race_id):
         race = Race.objects.get(id=race_id)
         athlete = request.user.athlete.id
@@ -187,29 +189,41 @@ class AddResultsView(LoginRequiredMixin, View):
             bike = form.cleaned_data['bike']
             T2 = form.cleaned_data['T2']
             run = form.cleaned_data['run']
-            race_id = Race.objects.get(pk=race_id)
-            athlete_id = Athlete.objects.get(pk=request.user.athlete.id)
-            if Results.objects.filter(race=None, athlete=None):
+            race = Race.objects.get(pk=race_id)
+            athlete = Athlete.objects.get(pk=request.user.athlete.id)
+            if Results.objects.filter(race_id=None, athlete_id=None):
                 Results.objects.create(
-                    race=race_id,
-                    athlete=athlete_id,
+                    race=race,
+                    athlete=athlete,
                     swim=swim,
                     T1=T1,
                     bike=bike,
                     T2=T2,
-                    run=run)
+                    run=run,
+                )
             else:
                 Results.objects.update(
-                    race=race_id,
-                    athlete=athlete_id,
+                    race=race,
+                    athlete=athlete,
                     swim=swim,
                     T1=T1,
                     bike=bike,
                     T2=T2,
-                    run=run)
+                    run=run,
+                )
             return redirect('my-results')
         else:
             return render(request, 'add_results.html')
+
+
+# class DeleteResultsView(View):
+#     """
+#     Deletes the results of a particular race
+#     """
+#     def get(self, request, results_id):
+#         results = Results.objects.get(pk=results_id)
+#         results.delete()
+#         return render(request, 'delete_results.html')
 
 
 class MyResultsView(LoginRequiredMixin, View):
@@ -220,7 +234,6 @@ class MyResultsView(LoginRequiredMixin, View):
     def get(self, request):
         athlete = request.user.athlete.id
         results = Results.objects.filter(athlete=athlete)
-        race = Race.objects.filter(participants=athlete)
         ctx = {'results': results}
         return render(request, 'my_results.html', ctx)
 
@@ -257,18 +270,3 @@ class EnrollView(LoginRequiredMixin, View):
             return render(request, 'enroll.html', ctx)
         else:
             return render(request, 'race_details.html')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

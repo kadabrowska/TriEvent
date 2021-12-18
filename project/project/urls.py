@@ -36,4 +36,5 @@ urlpatterns = [
     path('my/profile/<int:user_id>/', MyProfileView.as_view(), name='my-profile'),
     path('races/details/<int:race_id>/enroll/<int:user_id>', EnrollView.as_view(), name='enroll-athlete'),
     path('add/results/<int:race_id>/', AddResultsView.as_view(), name='add-results'),
+    #path('delete/results/<int:results_id>/', DeleteResultsView.as_view(), name='delete-results'),
 ]

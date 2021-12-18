@@ -5,7 +5,7 @@
 {% if user.is_authenticated %}
 <div class="my-results-box">
     <h3>Moje wyniki</h3>
-    <table style="width: 100%;">
+    <table>
         <colgroup>
             <col span="1" style="width: 15%;">
             <col span="6" style="width: 3%;">
@@ -31,11 +31,13 @@
                 <td>{{result.T2|time:"H:i:s"}}</td>
                 <td>{{result.run|time:"H:i:s"}}</td>
                 <td>{{total_time|time:"H:i:s"}}</td>
+                <!-- <td><a href="/delete/results/{{result.id}}">usuń</a></td> -->
             </tr>
         </tbody>
     {% endfor %}
     {% else %}
     <h3>Musisz się zalogować, aby zobaczyć swoje wyniki</h3>
+    </table>
 </div>
 
 {% endif %}
