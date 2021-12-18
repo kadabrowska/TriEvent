@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -191,7 +192,7 @@ class AddResultsView(LoginRequiredMixin, View):
             run = form.cleaned_data['run']
             race = Race.objects.get(pk=race_id)
             athlete = Athlete.objects.get(pk=request.user.athlete.id)
-            if Results.objects.filter(race_id=None, athlete_id=None):
+            if not Results.objects.filter(race=race, athlete=athlete).exists():
                 Results.objects.create(
                     race=race,
                     athlete=athlete,
@@ -216,14 +217,14 @@ class AddResultsView(LoginRequiredMixin, View):
             return render(request, 'add_results.html')
 
 
-# class DeleteResultsView(View):
-#     """
-#     Deletes the results of a particular race
-#     """
-#     def get(self, request, results_id):
-#         results = Results.objects.get(pk=results_id)
-#         results.delete()
-#         return render(request, 'delete_results.html')
+class DeleteResultsView(View):
+    """
+    Deletes the results of a particular race
+    """
+    def get(self, results_id):
+        results = Results.objects.filter(pk=results_id)
+        results.delete()
+        return redirect('/my/results/')
 
 
 class MyResultsView(LoginRequiredMixin, View):

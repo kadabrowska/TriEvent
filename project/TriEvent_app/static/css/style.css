@@ -334,6 +334,22 @@ body {
   background: rgba(64, 64, 64, 0.4);
   padding: 2px;
 }
+.delete-button {
+  text-decoration: none;
+  color: whitesmoke;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  border: 2px solid whitesmoke;
+  border-radius: 5px;
+  background-color: dimgrey;
+  font-size: 15px;
+  padding: 3px 5px 3px 5px;
+}
+.delete-button:hover {
+  color: black;
+  border-color: black;
+  background: whitesmoke;
+}
 /* details page */
 .details-page h2 {
   text-align: center;

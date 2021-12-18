@@ -8,7 +8,7 @@
     <table>
         <colgroup>
             <col span="1" style="width: 15%;">
-            <col span="6" style="width: 3%;">
+            <col span="7" style="width: 3%;">
         </colgroup>
         <thead>
             <tr>
@@ -19,6 +19,7 @@
                 <th>T2</th>
                 <th>bieg</th>
                 <th>czas całkowity</th>
+                <th></th>
             </tr>
         </thead>
         {% for result in results %}
@@ -31,7 +32,7 @@
                 <td>{{result.T2|time:"H:i:s"}}</td>
                 <td>{{result.run|time:"H:i:s"}}</td>
                 <td>{{total_time|time:"H:i:s"}}</td>
-                <!-- <td><a href="/delete/results/{{result.id}}">usuń</a></td> -->
+                <td><a class="delete-button" href="/delete/results/{{result.id}}">usuń</a></td>
             </tr>
         </tbody>
     {% endfor %}
