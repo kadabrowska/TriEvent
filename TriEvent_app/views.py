@@ -155,7 +155,7 @@ class MyRacesView(LoginRequiredMixin, View):
     """
     def get(self, request):
         user = request.user.id
-        athlete = Athlete.objects.get(user_id=user)
+        athlete = Athlete.objects.filter(user_id=user)
         races = Race.objects.filter(participants=athlete)
         ctx = {'races': races}
         return render(request, 'my_races.html', ctx)
@@ -167,7 +167,7 @@ class DeleteMyRaceView(View):
     """
     def get(self, request, race_id):
         user = request.user.id
-        athlete = Athlete.objects.get(user_id=user)
+        athlete = Athlete.objects.filter(user_id=user)
         race = Race.objects.get(pk=race_id)
         race.participants.remove(athlete)
         return redirect('my-races')
@@ -180,7 +180,7 @@ class AddResultsView(LoginRequiredMixin, View):
     def get(self, request, race_id):
         race = Race.objects.get(id=race_id)
         user = request.user.id
-        athlete = Athlete.objects.get(user_id=user)
+        athlete = Athlete.objects.filter(user_id=user)
         form = AddResultsForm()
         ctx = {'form': form, 'race': race, 'athlete': athlete}
         return render(request, 'add_results.html', ctx)
@@ -195,7 +195,7 @@ class AddResultsView(LoginRequiredMixin, View):
             run = form.cleaned_data['run']
             race = Race.objects.get(pk=race_id)
             user = request.user.id
-            athlete = Athlete.objects.get(user_id=user)
+            athlete = Athlete.objects.filter(user_id=user)
             if not Results.objects.filter(race=race, athlete=athlete).exists():
                 Results.objects.create(
                     race=race,
@@ -226,7 +226,7 @@ class DeleteResultsView(View):
     Deletes the results of a particular race
     """
     def get(self, results_id):
-        results = Results.objects.filter(pk=results_id)
+        results = Results.objects.get(pk=results_id)
         results.delete()
         return redirect('/my/results/')
 
@@ -238,7 +238,7 @@ class MyResultsView(LoginRequiredMixin, View):
     """
     def get(self, request):
         user = request.user.id
-        athlete = Athlete.objects.get(user_id=user)
+        athlete = Athlete.objects.filter(user_id=user)
         results = Results.objects.filter(athlete=athlete)
         ctx = {'results': results}
         return render(request, 'my_results.html', ctx)
