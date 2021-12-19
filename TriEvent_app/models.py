@@ -4,31 +4,31 @@ from datetime import date
 
 
 DISTANCE = (
-    (1, "Super Sprint"),
-    (2, "Sprint"),
-    (3, "Olimpijski"),
-    (4, "1/4"),
-    (5, "1/2"),
-    (6, "Ironman"),
+    ("Super Sprint", "Super Sprint"),
+    ("Sprint", "Sprint"),
+    ("Olimpijski", "Olimpijski"),
+    ("1/4", "1/4"),
+    ("1/2", "1/2"),
+    ("Ironman", "Ironman"),
 )
 
 VOIVODESHIP = (
-    (1, "dolnośląskie"),
-    (2, "kujawsko-pomorskie"),
-    (3, "lubelskie"),
-    (4, "lubuskie"),
-    (5, "łódzkie"),
-    (6, "małopolskie"),
-    (7, "mazowieckie"),
-    (8, "opolskie"),
-    (9, "podkarpackie"),
-    (10, "podlaskie"),
-    (11, "pomorskie"),
-    (12, "śląskie"),
-    (13, "świętokrzyskie"),
-    (14, "warmińsko-mazurskie"),
-    (15, "wielkopolskie"),
-    (16, "zachodniopomorskie"),
+    ("dolnośląskie", "dolnośląskie"),
+    ("kujawsko-pomorskie", "kujawsko-pomorskie"),
+    ("lubelskie", "lubelskie"),
+    ("lubuskie", "lubuskie"),
+    ("łódzkie", "łódzkie"),
+    ("małopolskie", "małopolskie"),
+    ("mazowieckie", "mazowieckie"),
+    ("opolskie", "opolskie"),
+    ("podkarpackie", "podkarpackie"),
+    ("podlaskie", "podlaskie"),
+    ("pomorskie", "pomorskie"),
+    ("śląskie", "śląskie"),
+    ("świętokrzyskie", "świętokrzyskie"),
+    ("warmińsko-mazurskie", "warmińsko-mazurskie"),
+    ("wielkopolskie", "wielkopolskie"),
+    ("zachodniopomorskie", "zachodniopomorskie"),
 )
 
 AGE_GROUP = (
@@ -51,11 +51,11 @@ PROFICIENCY = (
 )
 
 RATING = (
-    (1, "słabo"),
-    (2, "tak sobie"),
-    (3, "OK"),
-    (4, "fajnie"),
-    (5, "rewelacja"),
+    ("słabo", "słabo"),
+    ("tak sobie", "tak sobie"),
+    ("OK", "OK"),
+    ("fajnie", "fajnie"),
+    ("rewelacja", "rewelacja"),
 )
 
 

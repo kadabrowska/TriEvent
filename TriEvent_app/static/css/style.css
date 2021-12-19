@@ -1,6 +1,11 @@
 /* base html */
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Montserrat:ital,wght@1,200&family=Noto+Serif+Display:wght@900&family=Oswald&family=Roboto+Mono&display=swap');
+html {
+    height: 100%;
+    margin: 0;
+}
 body {
+  height: 100%;
   background-color: lightgray;
 }
 /* header */
@@ -437,4 +442,17 @@ body {
   color: black;
   border-color: black;
   background: whitesmoke;
+}
+
+@media only screen and (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+    }
+    .inner-header {
+        flex-wrap: wrap;
+    }
+    .inner-header-text {
+        flex-basis: 100%;
+        margin-top: 10px;
+    }
 }
