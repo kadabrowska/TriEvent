@@ -154,7 +154,8 @@ class MyRacesView(LoginRequiredMixin, View):
     Shows races of the logged in athlete.
     """
     def get(self, request):
-        athlete = request.user.athlete.id
+        user = request.user.id
+        athlete = Athlete.objects.get(user_id=user)
         races = Race.objects.filter(participants=athlete)
         ctx = {'races': races}
         return render(request, 'my_races.html', ctx)
@@ -165,7 +166,8 @@ class DeleteMyRaceView(View):
     Deleting races from the list.
     """
     def get(self, request, race_id):
-        athlete = request.user.athlete.id
+        user = request.user.id
+        athlete = Athlete.objects.get(user_id=user)
         race = Race.objects.get(pk=race_id)
         race.participants.remove(athlete)
         return redirect('my-races')
@@ -177,7 +179,8 @@ class AddResultsView(LoginRequiredMixin, View):
     """
     def get(self, request, race_id):
         race = Race.objects.get(id=race_id)
-        athlete = request.user.athlete.id
+        user = request.user.id
+        athlete = Athlete.objects.get(user_id=user)
         form = AddResultsForm()
         ctx = {'form': form, 'race': race, 'athlete': athlete}
         return render(request, 'add_results.html', ctx)
@@ -191,7 +194,8 @@ class AddResultsView(LoginRequiredMixin, View):
             T2 = form.cleaned_data['T2']
             run = form.cleaned_data['run']
             race = Race.objects.get(pk=race_id)
-            athlete = Athlete.objects.get(pk=request.user.athlete.id)
+            user = request.user.id
+            athlete = Athlete.objects.get(user_id=user)
             if not Results.objects.filter(race=race, athlete=athlete).exists():
                 Results.objects.create(
                     race=race,
@@ -233,7 +237,8 @@ class MyResultsView(LoginRequiredMixin, View):
     Only for authenticated users.
     """
     def get(self, request):
-        athlete = request.user.athlete.id
+        user = request.user.id
+        athlete = Athlete.objects.get(user_id=user)
         results = Results.objects.filter(athlete=athlete)
         ctx = {'results': results}
         return render(request, 'my_results.html', ctx)
