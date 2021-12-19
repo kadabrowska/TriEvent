@@ -241,7 +241,7 @@ class MyResultsView(LoginRequiredMixin, View):
         athlete = Athlete.objects.filter(user_id=user)
         results = Results.objects.filter(athlete=athlete)
         ctx = {'results': results}
-        return render(request, 'my-results', ctx)
+        return render(request, 'my_results.html', ctx)
 
 
 class MyProfileView(LoginRequiredMixin, View):
