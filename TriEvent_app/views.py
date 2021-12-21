@@ -237,8 +237,8 @@ class MyResultsView(LoginRequiredMixin, View):
     Only for authenticated users.
     """
     def get(self, request):
-        athlete = Athlete.objects.filter(user=request.user.id)
-        results = Results.objects.filter(athlete=athlete)
+        user = request.user.id
+        results = Results.objects.filter(athlete=user)
         ctx = {'results': results}
         return render(request, 'my_results.html', ctx)
 
