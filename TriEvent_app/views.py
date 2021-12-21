@@ -238,8 +238,8 @@ class MyResultsView(LoginRequiredMixin, View):
     """
     def get(self, request):
         user = request.user.id
-        athlete = Athlete.objects.get(user_id=user)
-        results = Results.objects.get(athlete=athlete)
+        athlete = Athlete.objects.filter(user_id=user)
+        results = Results.objects.filter(athlete=athlete)
         ctx = {'results': results}
         return render(request, 'my_results.html', ctx)
 
