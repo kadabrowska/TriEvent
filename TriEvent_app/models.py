@@ -79,7 +79,7 @@ class Race(models.Model):
     voivodeship = models.CharField(choices=VOIVODESHIP, max_length=50)
     description = models.CharField(max_length=1500)
     race_url = models.URLField()
-    participants = models.ManyToManyField(Athlete)
+    participants = models.ManyToManyField(Athlete, default=None)
 
 
 class Results(models.Model):
