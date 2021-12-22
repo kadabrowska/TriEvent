@@ -154,8 +154,7 @@ class MyRacesView(LoginRequiredMixin, View):
     Shows races of the logged in athlete.
     """
     def get(self, request):
-        user = request.user.id
-        athlete = Athlete.objects.filter(user_id=user)
+        athlete = Athlete.objects.filter(user=request.user.id)
         races = Race.objects.filter(participants=athlete)
         ctx = {'races': races}
         return render(request, 'my_races.html', ctx)
