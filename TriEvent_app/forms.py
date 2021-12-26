@@ -59,7 +59,7 @@ class AddRaceForm(forms.Form):
     distance = forms.ChoiceField(label='dystans', choices=DISTANCE)
     date = forms.DateField(label='data')
     city = forms.CharField(label='miasto', max_length=255)
-    voivodeship = forms.CharField(label='województwo', choices=VOIVODESHIP, max_length=50)
+    voivodeship = forms.ChoiceField(label='województwo', choices=VOIVODESHIP)
     description = forms.CharField(label='opis', widget=forms.Textarea)
     race_url = forms.URLField(label='link do zapisów')
 
