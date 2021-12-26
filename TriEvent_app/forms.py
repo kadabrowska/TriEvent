@@ -57,7 +57,7 @@ class AddRaceForm(forms.Form):
     name = forms.CharField(label='nazwa zawodów', max_length=255)
     organiser = forms.CharField(label='organizator', max_length=255)
     distance = forms.ChoiceField(label='dystans', choices=DISTANCE)
-    date = forms.DateField(label='data')
+    date = forms.DateField(label='data', widget=forms.SelectDateWidget)
     city = forms.CharField(label='miasto', max_length=255)
     voivodeship = forms.ChoiceField(label='województwo', choices=VOIVODESHIP)
     description = forms.CharField(label='opis', widget=forms.Textarea)
