@@ -145,6 +145,17 @@ body {
   left: 35%;
   font-family: 'Montserrat', sans-serif;
 }
+.add-race-box {
+  position: absolute;
+  height: 700px;
+  width: 380px;
+  background: rgba(13, 13, 13, 0.4);
+  border-radius: 5px 5px;
+  padding-left: 15px;
+  padding-top: 2px;
+  left: 35%;
+  font-family: 'Montserrat', sans-serif;
+}
 .profile-description {
   line-height: 30px;
 }
