@@ -49,7 +49,7 @@ class AddRaceView(View):
             description = form.cleaned_data['description']
             race_url = form.cleaned_data['race_url']
 
-            if Race.objects.filter(name=name, distance=distance, date=date)
+            if Race.objects.filter(name=name, distance=distance, date=date):
                 form.add_error("Te zawody już są w naszej bazie")
 
             if not form.errors():
