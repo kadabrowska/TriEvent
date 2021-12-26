@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views import View
 
-from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm, EnrollForm, AddResultsForm
+from TriEvent_app.forms import RegistrationForm, LoginForm, FindRaceForm, EnrollForm, AddResultsForm, AddRaceForm
 from TriEvent_app.models import Athlete, Race, Results
 
 
@@ -27,6 +27,49 @@ class FindRaceView(View):
         ctx = {'form': form}
         return render(request, "find_race.html", ctx)
 
+
+class AddRaceView(View):
+    """
+    Creating new races by organizers.
+    """
+    def get(self, request):
+        form = AddRaceForm()
+        ctx = {'form': form}
+        return render(request, "add_race.html", ctx)
+
+    def post(self, request):
+        form = AddRaceForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            organiser = form.cleaned_data['organiser']
+            distance = form.cleaned_data['distance']
+            date = form.cleaned_data['date']
+            city = form.cleaned_data['city']
+            voivodeship = form.cleaned_data['voivodeship']
+            description = form.cleaned_data['description']
+            race_url = form.cleaned_data['race_url']
+
+            if Race.objects.filter(name=name, distance=distance, date=date)
+                form.add_error("Te zawody już są w naszej bazie")
+
+            if not form.errors():
+                Race.objects.create(
+                    name=name,
+                    organiser=organiser,
+                    distance=distance,
+                    date=date,
+                    city=city,
+                    voivodeship=voivodeship,
+                    description=description,
+                    race_url=race_url,
+                )
+                return redirect('races-list')
+
+            ctx = {"form": form}
+            return render(request, "add_race.html", ctx)
+
+        else:
+            return redirect('homepage')
 
 class RacesListView(View):
     """

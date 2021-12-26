@@ -52,9 +52,22 @@ class AddResultsForm(forms.Form):
     T2 = forms.TimeField(label='T2', required=True, widget=forms.TimeInput(format='%H:%M:%S'))
     run = forms.TimeField(label='bieg', required=True, widget=forms.TimeInput(format='%H:%M:%S'))
 
-# class ReviewForm(forms.Form):
-#     rating = forms.ChoiceField(choices=RATING, label='Ocena:')
-#     comment = forms.CharField(widget=forms.Textarea, label="Napisz coś...")
+
+class AddRaceForm(forms.Form):
+    name = forms.CharField(label='nazwa zawodów', max_length=255)
+    organiser = forms.CharField(label='organizator', max_length=255)
+    distance = forms.ChoiceField(label='dystans', choices=DISTANCE)
+    date = forms.DateField(label='data')
+    city = forms.CharField(label='miasto', max_length=255)
+    voivodeship = forms.CharField(label='województwo', choices=VOIVODESHIP, max_length=50)
+    description = forms.CharField(label='opis', widget=forms.Textarea)
+    race_url = forms.URLField(label='link do zapisów')
+
+
+ # class ReviewForm(forms.Form):
+ #     race = forms.IntegerField(widget=forms.HiddenInput, required=False)
+ #     rating = forms.ChoiceField(choices=RATING, label='Ocena:')
+ #     comment = forms.CharField(widget=forms.Textarea, label="Napisz coś...")
 
 
 # class ResetProfileForm(forms.Form):
@@ -64,3 +77,5 @@ class AddResultsForm(forms.Form):
 #                                    required=True)
 #     age_group = forms.ChoiceField(choices=AGE_GROUP, label='nowa grupa wiekowa',
 #                                   required=True)
+
+

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{% endblock title %}
+{% block content %}
+<div class="form-box">
+    <h3>Dodaj zawody do naszej bazy</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Dodaj" class="reg-button">
+</form>
+</div>
+{% endblock %}
