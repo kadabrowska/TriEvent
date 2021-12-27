@@ -237,7 +237,7 @@ class AddResultsView(LoginRequiredMixin, View):
             run = form.cleaned_data['run']
             race = Race.objects.get(pk=race_id)
             user = request.user.id
-            athlete = Athlete.objects.filter(user_id=user)
+            athlete = Athlete.objects.get(user_id=user)
             if not Results.objects.filter(race=race, athlete=athlete).exists():
                 Results.objects.create(
                     race=race,
