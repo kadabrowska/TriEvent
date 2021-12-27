@@ -268,7 +268,7 @@ class DeleteResultsView(View):
     Deletes the results of a particular race
     """
     def get(self, results_id):
-        results = Results.objects.get(pk=results_id)
+        results = Results.objects.filter(pk=results_id)
         results.delete()
         return redirect('/my/results/')
 
