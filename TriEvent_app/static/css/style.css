@@ -135,7 +135,7 @@ body {
   font-weight: bold;
 }
 .form-box {
-  position: fixed;
+  position: absolute;
   height: 780px;
   width: 380px;
   background: rgba(13, 13, 13, 0.4);
