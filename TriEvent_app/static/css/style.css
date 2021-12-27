@@ -135,8 +135,8 @@ body {
   font-weight: bold;
 }
 .form-box {
-  position: absolute;
-  height: 750px;
+  position: fixed;
+  height: 780px;
   width: 380px;
   background: rgba(13, 13, 13, 0.4);
   border-radius: 5px 5px;
@@ -187,7 +187,7 @@ body {
 .form-box p select {
   margin-right: 80px;
   margin-left: 50px;
-  width: 200px;
+  width: 160px;
   height: 25px;
   border-radius: 5px 5px;
   font-size: 16px;
